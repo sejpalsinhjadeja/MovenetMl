@@ -16,12 +16,12 @@ public class GameItem : MonoBehaviour
    [SerializeField] ObjectType itemType;
    [SerializeField] float  objectSeconds=0;
    [SerializeField] Image processImage = null;
-   [SerializeField] ParticleSystem destroyEffect = null; 
-   [SerializeField] int positiveScore = 0;
-   [SerializeField] int negativeScore = 0;
-   [SerializeField] TextMeshProUGUI animText;
-   [SerializeField] GameObject positiveGameObj;
-   [SerializeField] GameObject negativeGameObj;
+   //[SerializeField] ParticleSystem destroyEffect = null;  TODO : Create and Add ParticaleSystem
+  // [SerializeField] int positiveScore = 2;                TODO : ADD Score and Level System  
+  // [SerializeField] int negativeScore = 2;
+  // [SerializeField] TextMeshProUGUI animText=null;        TODO: Add Text Animation at Time Of Increment or Decrement Score
+   [SerializeField] GameObject positiveGameObj=null;
+   [SerializeField] GameObject negativeGameObj =null;
 
    public  static Action<int> generateNewItems = delegate{};
 
@@ -35,9 +35,9 @@ public class GameItem : MonoBehaviour
     //     processImage = transform.GetChild(0).GetChild(0).GetComponent<Image>();
          processImage.fillAmount=1;
          processImage.DOFillAmount(0f,objectSeconds-0.2f).OnComplete(()=>{
-             if (ObjectType.Touchable==itemType)
+             if (ObjectType.Touchable==itemType && !GameManager.isGameOver)
              {
-                 generateNewItems?.Invoke(2);
+                 generateNewItems?.Invoke(0);
              }
              Destroy(this.gameObject);
 

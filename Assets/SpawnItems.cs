@@ -6,10 +6,9 @@ using UnityEngine;
 public class SpawnItems : MonoBehaviour
 {
 
-    private  float screenHalfWidthInWold;
-    private float screenHalfHeightInWold;
-   [SerializeField] private GameItem item;
-   [SerializeField] private int generateTimeing = 3;
+    private  float screenHalfWidthInWold = 0f;
+    private float screenHalfHeightInWold = 0f;
+   [SerializeField] private GameItem item = null;
    [SerializeField] private int numberOfGenerateAtTime = 3;
    List<GameItem> spawnObjects = null;
    [SerializeField] private float separateDistance = 0.5f;
@@ -35,11 +34,7 @@ public class SpawnItems : MonoBehaviour
         screenHalfHeightInWold = (Camera.main.orthographicSize - (item.transform.localScale.x / 2));
         screenHalfWidthInWold = (Camera.main.aspect * Camera.main.orthographicSize) - (item.transform.localScale.x / 2);
 
-        if(separateDistance>=screenHalfWidthInWold)
-        {
-            separateDistance = 0;
-            print("Reduce Separate Distance!");
-        }
+     
 
         for(int i=1;i<2;i++)
         {
@@ -54,10 +49,10 @@ public class SpawnItems : MonoBehaviour
         GA:
         var x = Random.Range(-screenHalfWidthInWold,screenHalfWidthInWold);
         var y = Random.Range(-screenHalfHeightInWold,screenHalfHeightInWold);
-        
-        if(!isTooClose(x,separateDistance,spawnObjects) || loopCounter > 3)
+         Vector3 location = new Vector3(x,y,0f);
+           
+        if(!isTooClose(location,separateDistance,spawnObjects) || loopCounter > 3)
         {
-            Vector3 location = new Vector3(x,y,0f);
             var obj = Instantiate(item.gameObject, location, Quaternion.identity, this.transform).GetComponent<GameItem>();
             obj.ItemType = type; 
             spawnObjects.Add(obj);
@@ -79,7 +74,7 @@ public class SpawnItems : MonoBehaviour
      private void generateNextItem(int obj)
     {
         spawnObjects.Clear();
-        for (int a = 0;a<obj;a++)
+        for (int a = 0;a<numberOfGenerateAtTime;a++)
         {
             var index =  a%2;
             ObjectType[] type = new ObjectType[]{ObjectType.Nontouchable,ObjectType.Touchable};
@@ -88,7 +83,7 @@ public class SpawnItems : MonoBehaviour
     }
 
 
-bool isTooClose(float x, float minimumDistance, List<GameItem> list)
+bool isTooClose(Vector3 pos, float minimumDistance, List<GameItem> list)
  {
          if (list == null)
          {
@@ -99,7 +94,9 @@ bool isTooClose(float x, float minimumDistance, List<GameItem> list)
  
             foreach (var f in list)
             {
-                if (Mathf.Abs(x) > Mathf.Abs(f.transform.position.x) + minimumDistance)
+                var dist = f.transform.position - pos;
+                print(dist.magnitude);
+                if (dist.magnitude >  minimumDistance)
                 {
                     tooClose = false;
                     break;
