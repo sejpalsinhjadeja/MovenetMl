@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,13 +20,49 @@ public class GameItem : MonoBehaviour
    [SerializeField] int positiveScore = 0;
    [SerializeField] int negativeScore = 0;
    [SerializeField] TextMeshProUGUI animText;
+   [SerializeField] GameObject positiveGameObj;
+   [SerializeField] GameObject negativeGameObj;
 
-    
+   public  static Action<int> generateNewItems = delegate{};
+
+
+
+
+    void Start()
+    {
+      if(processImage!=null)
+      {
+    //     processImage = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+         processImage.fillAmount=1;
+         processImage.DOFillAmount(0f,objectSeconds-0.2f).OnComplete(()=>{
+             if (ObjectType.Touchable==itemType)
+             {
+                 generateNewItems?.Invoke(2);
+             }
+             Destroy(this.gameObject);
+
+         });   
+      }
+    }
+
     
     public ObjectType ItemType
     {
        get{return this.itemType;}
-       set{this.itemType =value;}
+       set{
+      
+               this.itemType =value;
+               if(this.itemType == ObjectType.Touchable)
+               {
+                  positiveGameObj.gameObject.SetActive(true);
+                  negativeGameObj.gameObject.SetActive(false);
+               }  
+               else
+               {
+                  negativeGameObj.gameObject.SetActive(true);
+                  positiveGameObj.gameObject.SetActive(false);
+               }     
+          }
     }
 
 
@@ -34,11 +70,6 @@ public class GameItem : MonoBehaviour
     public Transform GetTransform()
     {return this.transform;}
     
-    private void Destroy() {
-            
-                Destroy(this.gameObject);
-         
-         }
 
 
 
