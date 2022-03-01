@@ -3,6 +3,8 @@
 *   Copyright (c) 2021 Yusuf Olokoba.
 */
 
+using System.Linq;
+
 namespace NatSuite.ML.Visualizers {
 
     using System.Collections.Generic;
@@ -39,13 +41,26 @@ namespace NatSuite.ML.Visualizers {
             if (pose == null)
                 return;
             // Render keypoints
+            
             foreach (var point in pose) {
                 // Check confidence
                 if (point.z < confidenceThreshold)
                     continue;
                 // Instantiate
                 var anchor = Instantiate(keypoint, transform);
-                anchor.gameObject.SetActive(true);
+                anchor.gameObject.SetActive(false);
+                
+                if (point == pose[9])
+                {
+                    anchor.gameObject.name = "leftWrist";
+                    anchor.gameObject.SetActive(true);
+                }
+                else if (point == pose[10])
+                {
+                    anchor.gameObject.name = "rightWrist";
+                    anchor.gameObject.SetActive(true);
+                }
+                
                 // Position
                 anchor.anchorMin = 0.5f * Vector2.one;
                 anchor.anchorMax = 0.5f * Vector2.one;

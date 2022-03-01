@@ -85,7 +85,6 @@ GameObject:
   - component: {fileID: 749161353325258970}
   - component: {fileID: 749161353325258964}
   - component: {fileID: 749161353325258965}
-  - component: {fileID: 749161353325258967}
   m_Layer: 5
   m_Name: BGTrueCircle
   m_TagString: Untagged
@@ -151,27 +150,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &749161353325258967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749161353325258971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ce5c45c22b4f9418ab0ae3865bc253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 0
-  objectSeconds: 0
-  processImage: {fileID: 0}
-  destroyEffect: {fileID: 0}
-  positiveScore: 0
-  negativeScore: 0
-  animText: {fileID: 0}
-  positiveGameObj: {fileID: 0}
-  negativeGameObj: {fileID: 0}
 --- !u!1 &749161353479772849
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,10 +429,6 @@ MonoBehaviour:
   itemType: 0
   objectSeconds: 5
   processImage: {fileID: 749161353778775700}
-  destroyEffect: {fileID: 0}
-  positiveScore: 5
-  negativeScore: 2
-  animText: {fileID: 0}
   positiveGameObj: {fileID: 749161353325258971}
   negativeGameObj: {fileID: 749161354973430970}
 --- !u!222 &6507535452588433646
