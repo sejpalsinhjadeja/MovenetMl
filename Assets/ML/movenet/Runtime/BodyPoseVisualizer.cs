@@ -42,30 +42,42 @@ namespace NatSuite.ML.Visualizers {
                 return;
             // Render keypoints
             
-            foreach (var point in pose) {
+            // leftElbow  --> [7];
+            // rightElbow --> [8];
+            // leftWrist  --> [9];
+            // rightWrist --> [10];
+
+            // Calculate dist. between elbow and wrist, divide it by 3 and set the point at location wrist point + 1/3rd the distance
+            
+            // 1/3rd vector in the direction from left elbow to left wrist
+            var leftPalmDotDirection = (pose[9] - pose[7]) / 3; 
+            var leftPalmLocation = pose[9] + leftPalmDotDirection;
+            
+            // 1/3rd vector in the direction from right elbow to right wrist
+            var rightPalmDotDirection = (pose[10] - pose[8]) / 3; 
+            var rightPalmLocation = pose[10] + rightPalmDotDirection;
+            
+            Vector3[] palms = { leftPalmLocation, rightPalmLocation };
+
+            for (int i = 0; i < palms.Length; i++)
+            {
                 // Check confidence
-                if (point.z < confidenceThreshold)
-                    continue;
-                // Instantiate
+                if (palms[i].z < confidenceThreshold)
+                {
+                    return;
+                }
+                
                 var anchor = Instantiate(keypoint, transform);
                 anchor.gameObject.SetActive(false);
-                
-                if (point == pose[9])
-                {
-                    anchor.gameObject.name = "leftWrist";
-                    anchor.gameObject.SetActive(true);
-                }
-                else if (point == pose[10])
-                {
-                    anchor.gameObject.name = "rightWrist";
-                    anchor.gameObject.SetActive(true);
-                }
-                
+            
                 // Position
                 anchor.anchorMin = 0.5f * Vector2.one;
                 anchor.anchorMax = 0.5f * Vector2.one;
                 anchor.pivot = 0.5f * Vector2.one;
-                anchor.anchoredPosition = Rect.NormalizedToPoint(imageTransform.rect, point);
+                anchor.anchoredPosition = Rect.NormalizedToPoint(imageTransform.rect, palms[i]);
+                
+                anchor.gameObject.SetActive(true);
+                
                 // Add
                 currentPoints.Add(anchor);
             }

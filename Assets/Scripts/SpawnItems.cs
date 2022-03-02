@@ -39,15 +39,12 @@ public class SpawnItems : MonoBehaviour
 		screenHalfHeightInWold = (mainCam.orthographicSize - (item.transform.localScale.x / 2));
 		screenHalfWidthInWold = (mainCam.aspect * mainCam.orthographicSize) - (item.transform.localScale.x / 2);
 
-		GenerateItem(true, "Start");
+		GenerateItem(true);
 	}
 
 
-	private void GenerateItem(bool generateBothItems = false, string cf = "")
+	private void GenerateItem(bool generateBothItems = false)
 	{
-		
-		print("Called by : " + cf);
-
 		int maxAllowed = 1;
 		
 		if (generateBothItems)
@@ -88,7 +85,7 @@ public class SpawnItems : MonoBehaviour
 		// {
 		// 	GenerateItem(true, "GenerateNextItem");
 		// }
-		GenerateItem(true, "GenerateNextItem");
+		GenerateItem(true);
 	}
 
 

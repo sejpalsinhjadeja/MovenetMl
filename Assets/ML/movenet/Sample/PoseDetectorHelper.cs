@@ -33,6 +33,8 @@
         WebCamDevice activeCameraDevice;
         WebCamTexture activeCameraTexture;
 
+        public float threshhold;
+        
         // Up Added by sejpal ==========
 
         async void Start()
@@ -65,7 +67,7 @@
             var input = new MLImageFeature(activeCameraTexture.GetPixels32(), image.texture.width, image.texture.height);
             (input.mean, input.std) = modelData.normalization;
             var pose = predictor.Predict(input);
-            visualizer.Render(image.texture, pose);
+            visualizer.Render(image.texture, pose, threshhold);
         }
 
         void OnDisable()

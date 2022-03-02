@@ -720,6 +720,7 @@ MonoBehaviour:
   image: {fileID: 1339786890}
   imageParent: {fileID: 840906881}
   imageFitter: {fileID: 1339786889}
+  threshhold: -2
 --- !u!1 &896829858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -85.000305}
+  m_AnchoredPosition: {x: 0, y: -85}
   m_SizeDelta: {x: -60, y: -230}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145430608

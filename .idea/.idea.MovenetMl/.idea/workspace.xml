@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea30abac-af75-4b25-8215-bd9256732a07" name="Changes" comment="" />
+    <list default="true" id="ea30abac-af75-4b25-8215-bd9256732a07" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MovenetMl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovenetMl/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ML/movenet/Runtime/BodyPoseVisualizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML/movenet/Runtime/BodyPoseVisualizer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ML/movenet/Sample/PoseDetectorHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML/movenet/Sample/PoseDetectorHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SpawnItems.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SpawnItems.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/api.natsuite.natml@1.0.8/Runtime/MLModel.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -28,20 +36,20 @@
     <property name="rider.run.widget.enabled.cache" value="false" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="13002">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
-      <option name="listenPortForConnections" value="true" />
-      <option name="pid" value="13002" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="13002">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="13002" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -58,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1646127505121</updated>
       <workItem from="1646127582226" duration="8896000" />
+      <workItem from="1646195071761" duration="4373000" />
     </task>
     <servers />
   </component>
@@ -66,24 +75,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/SpawnItems.cs</url>
-          <line>48</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/SpawnItems.cs" initialLine="48" containingFunctionPresentation="method 'GenerateItem'">
-            <startOffsets>
-              <option value="1129" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1156" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
