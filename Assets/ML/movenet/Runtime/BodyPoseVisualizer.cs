@@ -3,6 +3,7 @@
 *   Copyright (c) 2021 Yusuf Olokoba.
 */
 
+using System;
 using System.Linq;
 
 namespace NatSuite.ML.Visualizers {
@@ -18,6 +19,25 @@ namespace NatSuite.ML.Visualizers {
     /// </summary>
     [RequireComponent(typeof(RawImage), typeof(AspectRatioFitter))]
     public sealed class BodyPoseVisualizer : MonoBehaviour {
+        private void Start()
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                anchor = Instantiate(keypoint, transform);
+                
+                anchor.gameObject.SetActive(false);
+
+                anchor.gameObject.name = (i == 0) ? "LeftPalm" : "RightPalm";
+                
+                // Position
+                anchor.anchorMin = 0.5f * Vector2.one;
+                anchor.anchorMax = 0.5f * Vector2.one;
+                anchor.pivot = 0.5f * Vector2.one;
+                
+                // Add
+                currentPoints.Add(anchor);
+            }
+        }
 
         #region --Client API--
         /// <summary>
@@ -29,8 +49,10 @@ namespace NatSuite.ML.Visualizers {
         public void Render (Texture image, MoveNetPredictor.Pose pose, float confidenceThreshold = 0f) {
             // Delete current
             foreach (var point in currentPoints)
-                GameObject.Destroy(point.gameObject);
-            currentPoints.Clear();
+            {
+                point.gameObject.SetActive(false);
+            }
+            
             // Display image
             var imageTransform = transform as RectTransform;
             var rawImage = GetComponent<RawImage>();
@@ -40,6 +62,7 @@ namespace NatSuite.ML.Visualizers {
             // Check
             if (pose == null)
                 return;
+            
             // Render keypoints
             
             // leftElbow  --> [7];
@@ -58,36 +81,27 @@ namespace NatSuite.ML.Visualizers {
             var rightPalmLocation = pose[10] + rightPalmDotDirection;
             
             Vector3[] palms = { leftPalmLocation, rightPalmLocation };
-
+            
             for (int i = 0; i < palms.Length; i++)
             {
-                // Check confidence
-                if (palms[i].z < confidenceThreshold)
-                {
-                    return;
-                }
-                
-                var anchor = Instantiate(keypoint, transform);
-                anchor.gameObject.SetActive(false);
-            
-                // Position
-                anchor.anchorMin = 0.5f * Vector2.one;
-                anchor.anchorMax = 0.5f * Vector2.one;
-                anchor.pivot = 0.5f * Vector2.one;
-                anchor.anchoredPosition = Rect.NormalizedToPoint(imageTransform.rect, palms[i]);
-                
-                anchor.gameObject.SetActive(true);
-                
-                // Add
-                currentPoints.Add(anchor);
+                currentPoints[i].anchoredPosition = Rect.NormalizedToPoint(imageTransform.rect, palms[i]);
+                currentPoints[i].gameObject.SetActive(true);
             }
         }
+
+        public List<RectTransform> GetCurrentPoints()
+        {
+            return currentPoints;
+        }
+        
         #endregion
 
 
         #region --Operations--
         [SerializeField] RectTransform keypoint;
         List<RectTransform> currentPoints = new List<RectTransform>();
+        private RectTransform anchor;
+
         #endregion
     }
 }

@@ -10,7 +10,7 @@ public class SpawnItems : MonoBehaviour
 	private float screenHalfHeightInWold = 0f;
 	[SerializeField] private GameItem item = null;
 	[SerializeField] private int numberOfGenerateAtTime = 3;
-	List<GameItem> spawnObjects = null;
+	public static List<GameItem> spawnObjects = null;
 	[SerializeField] private float separateDistance = 0.5f;
 
 	private Camera mainCam = null;
@@ -100,7 +100,7 @@ public class SpawnItems : MonoBehaviour
 		{
 			var dist = Vector3.Distance(pos, f.transform.localPosition);
 			
-			print(dist);
+		//	print(dist);
 			
 			if (dist < minimumDistance)
 			{
