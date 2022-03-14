@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 
 public class SpawnItems : MonoBehaviour
@@ -10,83 +9,88 @@ public class SpawnItems : MonoBehaviour
 	private float screenHalfHeightInWold = 0f;
 	[SerializeField] private GameItem item = null;
 	[SerializeField] private int numberOfGenerateAtTime = 3;
-	public static List<GameItem> spawnObjects = null;
 	[SerializeField] private float separateDistance = 0.5f;
 
 	private Camera mainCam = null;
 
 	private void OnEnable()
 	{
-		EventManager.GenerateNewItem += GenerateNextItem;
+		//EventManager.GenerateNewItem += GenerateNextItem;
 	}
 
 
 	private void OnDisable()
 	{
-		EventManager.GenerateNewItem -= GenerateNextItem;
+		//EventManager.GenerateNewItem -= GenerateNextItem;
 	}
-
-
 	void Start()
 	{
-		spawnObjects = new List<GameItem>();
-
 		mainCam = Camera.main;
 
 		// Make sure that main camera is not null
 		if (!mainCam) return;
-		
+
 		screenHalfHeightInWold = (mainCam.orthographicSize - (item.transform.localScale.x / 2));
 		screenHalfWidthInWold = (mainCam.aspect * mainCam.orthographicSize) - (item.transform.localScale.x / 2);
 
-		GenerateItem(true);
+		for (int i = 0; i < 2; i++)
+		{
+			GameItem obj = Instantiate(item.gameObject, transform).GetComponent<GameItem>();
+			obj.SetPosition();
+			obj.ItemType = (ObjectType)i;
+			GameManager.generatedItems.Add(obj);
+		}
+		//GenerateItem(true);
 	}
 
 
 	private void GenerateItem(bool generateBothItems = false)
 	{
+		Debug.Log("GenerateItem : " + generateBothItems);
 		int maxAllowed = 1;
-		
+
 		if (generateBothItems)
 		{
 			maxAllowed = 2;
 		}
-		
-		for (int i = 0; i < maxAllowed; ++i)
+
+		// [gi1, gi2] = [0,0]
+
+		for (int i = 0; i < maxAllowed; i++) // ma : 2
 		{
 			var x = Random.Range(-screenHalfWidthInWold, screenHalfWidthInWold);
 			var y = Random.Range(-screenHalfHeightInWold, screenHalfHeightInWold);
 			Vector3 location = new Vector3(x, y, 0f);
 
-			if (IsTooClose(location, separateDistance, spawnObjects))
+			// , 100, [gi1,gi2]
+			//if (i > 0 && IsTooClose(location, separateDistance, GameManager.generatedItems))
+			//{
+			//	i--;
+			//}
+			//else
 			{
-				i--;
-			}
-			else
-			{
-				var obj = Instantiate(item.gameObject, location, Quaternion.identity, this.transform)
-					.GetComponent<GameItem>();
+				//GameManager.isDetecting = true;
 
-				obj.ItemType = (ObjectType)i;
-				spawnObjects.Add(obj);
-				var oPos = obj.transform.localPosition;
-				obj.transform.localPosition = new Vector3(oPos.x, oPos.y, 0f);
+				GameManager.generatedItems[i].ItemType = (ObjectType)i;
 
-				GameManager.generatedItemsPosition.Add(obj.GetTransform());
+				var oPos = location; // GameManager.generatedItems[i].GetTransform().localPosition;
+				GameManager.generatedItems[i].GetTransform().localPosition = new Vector3(oPos.x, oPos.y, 0f);
+
+				GameManager.generatedItems[i].gameObject.SetActive(true);
 			}
 		}
 	}
 
+	
 
-	private void GenerateNextItem()
-	{
-		spawnObjects.Clear();
-		// for (int a = 0; a < numberOfGenerateAtTime; a++)
-		// {
-		// 	GenerateItem(true, "GenerateNextItem");
-		// }
-		GenerateItem(true);
-	}
+	//private void GenerateNextItem()
+	//{
+	//	// for (int a = 0; a < numberOfGenerateAtTime; a++)
+	//	// {
+	//	// 	GenerateItem(true, "GenerateNextItem");
+	//	// }
+	//	GenerateItem(true);
+	//}
 
 
 	bool IsTooClose(Vector3 pos, float minimumDistance, List<GameItem> list)

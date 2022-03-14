@@ -81,11 +81,10 @@ namespace NatSuite.ML.Visualizers {
             var rightPalmLocation = pose[10] + rightPalmDotDirection;
             
             Vector3[] palms = { leftPalmLocation, rightPalmLocation };
-            
             for (int i = 0; i < palms.Length; i++)
             {
                 currentPoints[i].anchoredPosition = Rect.NormalizedToPoint(imageTransform.rect, palms[i]);
-                currentPoints[i].gameObject.SetActive(true);
+                //currentPoints[i].gameObject.SetActive(true);
             }
         }
 

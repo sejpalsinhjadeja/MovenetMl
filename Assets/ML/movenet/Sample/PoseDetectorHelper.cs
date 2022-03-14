@@ -34,7 +34,7 @@
         WebCamTexture activeCameraTexture;
 
         public float threshhold;
-        
+
         // Up Added by sejpal ==========
 
         async void Start()
@@ -62,29 +62,31 @@
 
         void Update()
         {
-            if (predictor == null)  return;
+            if (WebCamTexture.devices.Length == 0) { return; }
+            if (predictor == null) return;
             if (!image.texture) return;
             var input = new MLImageFeature(activeCameraTexture.GetPixels32(), image.texture.width, image.texture.height);
             (input.mean, input.std) = modelData.normalization;
             var pose = predictor.Predict(input);
             visualizer.Render(image.texture, pose, threshhold);
 
-          foreach (var palmDots in visualizer.GetCurrentPoints())
+            foreach (var palmDots in visualizer.GetCurrentPoints())
             {
                 // print("PPP Palm Dots : Local Pos -- " + palmDots.transform.localPosition + " name : " + palmDots.gameObject.name);
-                
-                foreach (var item in SpawnItems.spawnObjects)
+
+                foreach (var item in GameManager.generatedItems)
                 {
-                    if(!item) continue;
-                    
+                    if (!item.gameObject.activeSelf) continue;
+
                     // print("PPP Game Item : Local Pos -- " + item.transform.localPosition + " type : " + item.ItemType);
-                    
+
                     var dist = Vector3.Distance(item.transform.position, palmDots.transform.position);
-            
-                   //  print("Dist between item and palm dots : " + dist);
-                    
+
+
                     if (dist < 0.7f)
                     {
+                        print("Dist between item and palm dots : " + dist);
+
                         switch (item.ItemType)
                         {
                             case ObjectType.Touchable:
@@ -94,15 +96,8 @@
                                 print("<color=red>Touched untouchable item : Points--</color>");
                                 break;
                         }
-                        
-                        // foreach (GameItem gameItem in GameManager.generatedItems)
-                        // {
-                        //     gameItem.gameObject.SetActive(false);
-                        // }
-                        
-                        //EventManager.NotifyGenerateNewItem();
-                        
-                        return;
+                        item.SetPosition();
+
                     }
                     else
                     {

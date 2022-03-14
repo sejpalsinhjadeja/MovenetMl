@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     public static bool isGameOver = false;
     //public static int gameTotalScore = 0;
 
-    public static List<Transform> generatedItemsPosition;
+    public static List<GameItem> generatedItems;
     
     private void Start()
     {
-        generatedItemsPosition = new List<Transform>();
+        generatedItems = new List<GameItem>();
         GameTimer();   
     }
     private async void GameTimer()
