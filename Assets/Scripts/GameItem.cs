@@ -29,6 +29,12 @@ public class GameItem : MonoBehaviour
 
     void Start()
     {
+
+        EventManager.GameOver += () =>
+        {
+            gameObject.SetActive(false);
+        };
+        
         //rectTransform = GetComponent<RectTransform>();
         mainCam = Camera.main;
 
@@ -68,6 +74,9 @@ public class GameItem : MonoBehaviour
 
     public void SetPosition()
     {
+
+        if (GameManager.isGameOver) return;
+        
         float x = Random.Range(-screenHalfWidthInWold, screenHalfWidthInWold);
         float y = Random.Range(-screenHalfHeightInWold, screenHalfHeightInWold);
         Debug.Log("SetPosition ::: X " + x +"  *** Y ::"+ y);

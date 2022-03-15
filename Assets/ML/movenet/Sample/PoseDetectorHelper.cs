@@ -1,4 +1,6 @@
-﻿namespace NatSuite.Examples
+﻿using System.Collections.Generic;
+
+namespace NatSuite.Examples
 {
     using UnityEngine;
     using NatSuite.ML;
@@ -34,6 +36,7 @@
         WebCamTexture activeCameraTexture;
 
         public float threshhold;
+        
 
         // Up Added by sejpal ==========
 
@@ -62,7 +65,7 @@
 
         void Update()
         {
-            if (WebCamTexture.devices.Length == 0) { return; }
+            if (WebCamTexture.devices.Length == 0 || GameManager.isGameOver) { return; }
             if (predictor == null) return;
             if (!image.texture) return;
             var input = new MLImageFeature(activeCameraTexture.GetPixels32(), image.texture.width, image.texture.height);
@@ -70,7 +73,9 @@
             var pose = predictor.Predict(input);
             visualizer.Render(image.texture, pose, threshhold);
 
-            foreach (var palmDots in visualizer.GetCurrentPoints())
+            var temp = new List<RectTransform>(visualizer.GetCurrentPoints());
+
+            foreach (var palmDots in temp)
             {
                 // print("PPP Palm Dots : Local Pos -- " + palmDots.transform.localPosition + " name : " + palmDots.gameObject.name);
 
@@ -87,25 +92,12 @@
                     {
                         print("Dist between item and palm dots : " + dist);
 
-                        switch (item.ItemType)
-                        {
-                            case ObjectType.Touchable:
-                                print("<color=green>Touched touchable item : Points++</color>");
-                                break;
-                            case ObjectType.Nontouchable:
-                                print("<color=red>Touched untouchable item : Points--</color>");
-                                break;
-                        }
+                        EventManager.NotifyUpdateScore(item.ItemType);
                         item.SetPosition();
 
                     }
-                    else
-                    {
-                        // print("Dist is > 100");
-                    }
                 }
             }
-
         }
 
         void OnDisable()

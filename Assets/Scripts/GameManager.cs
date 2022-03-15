@@ -4,19 +4,34 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public int oneRoundTimer = 2;
     [SerializeField] TextMeshProUGUI timerTxt = null;
+    [SerializeField] TextMeshProUGUI scoreTxt = null;
+
+    public Button restartBtn;
+    
     public static bool isGameOver = false;
     //public static int gameTotalScore = 0;
 
-    public static List<GameItem> generatedItems;
+    public int positiveScore = 0;
+    public int negativeScore = 0;
     
+    public static List<GameItem> generatedItems;
+    private int score = 0;
+
+    public static bool isDetecting = false;
+
     private void Start()
     {
+        restartBtn.gameObject.SetActive(false);
         generatedItems = new List<GameItem>();
+
+        EventManager.UpdateScore += UpdateScoreValue;
+        
         GameTimer();   
     }
     private async void GameTimer()
@@ -39,6 +54,8 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     isGameOver = true;
+                    EventManager.NotifyGameOver();
+                    restartBtn.gameObject.SetActive(true);
                     break;
                 }
             }
@@ -48,13 +65,28 @@ public class GameManager : MonoBehaviour
             print("Game Is Over !");
         }
 
-    // private void Update()
-    // {
-    //     print(generatedItemsPosition.Count);
-    // }
-
     private void OnApplicationQuit()
     {
         isGameOver = true;
+    }
+
+    void UpdateScoreValue(ObjectType type)
+    {
+        switch (type)
+        {
+            case ObjectType.Touchable:
+                score += positiveScore;
+                break;
+            case ObjectType.Nontouchable:
+                score -= negativeScore;
+                break;
+        }
+        
+        scoreTxt.text = score.ToString();
+    }
+
+    public void Restart()
+    {
+        isGameOver = false;
     }
 }

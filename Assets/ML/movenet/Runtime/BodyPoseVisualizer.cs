@@ -26,7 +26,7 @@ namespace NatSuite.ML.Visualizers {
                 anchor = Instantiate(keypoint, transform);
                 
                 anchor.gameObject.SetActive(false);
-
+            
                 anchor.gameObject.name = (i == 0) ? "LeftPalm" : "RightPalm";
                 
                 // Position
