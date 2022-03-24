@@ -18,10 +18,10 @@ public class EventManager : MonoBehaviour
         GameOver?.Invoke();
     }
     
-    public static Action StartGame;
+    public static Action RestartGame;
 
-    public static void NotifyStartGame()
+    public static void NotifyRestartGame()
     {
-        StartGame?.Invoke();
+        RestartGame?.Invoke();
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -22,9 +23,7 @@ public class GameManager : MonoBehaviour
     
     public static List<GameItem> generatedItems;
     private int score = 0;
-
-    public static bool isDetecting = false;
-
+    
     private void Start()
     {
         restartBtn.gameObject.SetActive(false);
@@ -68,6 +67,7 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         isGameOver = true;
+        Application.Quit();
     }
 
     void UpdateScoreValue(ObjectType type)
@@ -88,5 +88,9 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         isGameOver = false;
+        score = 0;
+        EventManager.NotifyRestartGame();
+        SceneManager.LoadScene("SampleScene");
+        
     }
 }

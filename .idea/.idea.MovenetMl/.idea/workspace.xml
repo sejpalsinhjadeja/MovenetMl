@@ -6,24 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="ea30abac-af75-4b25-8215-bd9256732a07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MovenetMl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MovenetMl/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ML/movenet/Runtime/BodyPoseVisualizer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML/movenet/Runtime/BodyPoseVisualizer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML/movenet/Sample/PoseDetectorHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML/movenet/Sample/PoseDetectorHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameItem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SpawnItems.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SpawnItems.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/build_info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/build_info.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ea9ef0e402514e9f90256c59976645e2116200/2c/5c5118d2/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/api.natsuite.natml@1.0.8/Runtime/MLModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Phase10V2/Phase10V2/Assets/Phase10/Scripts/Gameplay/Phase10Table.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -84,6 +83,7 @@
       <workItem from="1646195071761" duration="8495000" />
       <workItem from="1647000365057" duration="248000" />
       <workItem from="1647337990305" duration="3213000" />
+      <workItem from="1648132262973" duration="2456000" />
     </task>
     <servers />
   </component>

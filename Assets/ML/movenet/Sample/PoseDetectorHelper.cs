@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NatSuite.Examples
 {
@@ -37,7 +38,6 @@ namespace NatSuite.Examples
 
         public float threshhold;
         
-
         // Up Added by sejpal ==========
 
         async void Start()
